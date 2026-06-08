@@ -4,10 +4,14 @@ Reusable tools and runbooks for collecting and cleaning Particle product event s
 
 ## Purpose
 
-Use this repository template to:
-- collect raw product event streams
-- clean noisy Particle events into readable operational lines
-- monitor resets, alerts, connectivity, and status behavior
+ParticleLogs provides a lightweight framework for:
+- Capturing Particle product event streams
+- Maintaining raw event archives
+- Generating concise operational logs
+- Monitoring fleets of Particle devices
+- Simplifying troubleshooting and field support
+
+The repository is designed for small teams operating Particle-based IoT deployments and can be adapted to any Particle product.
 
 ## Initial Setup
 
@@ -182,3 +186,13 @@ See `particle-log-subscription-runbook.md` for full setup.
 In short:
 - subscription tabs collect raw logs and generate clean logs
 - monitoring tabs tail `latest.clean.log` or pipe `latest.raw.log` through `particle_clean.py`
+
+## License
+
+This project is licensed under the MIT License.
+
+Copyright (c) 2026 See Insights LLC.
+
+See the `LICENSE` file for details.
+
+Contributions, improvements, and bug fixes are welcome.
