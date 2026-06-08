@@ -8,6 +8,10 @@ products/*/*.clean.log
 products/*/latest.raw.log
 products/*/latest.clean.log
 
+# Local inventory mapping (real device IDs stay local)
+inventory/devices.csv
+!inventory/devices.example.csv
+
 # macOS / editor noise
 .DS_Store
 .vscode/
