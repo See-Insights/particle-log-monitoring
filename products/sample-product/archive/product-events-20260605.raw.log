@@ -1,0 +1,3 @@
+{"published_at":"2026-06-05T14:10:00.000Z","productID":12345,"name":"spark/status","data":"offline"}
+{"published_at":"2026-06-05T14:10:08.000Z","productID":12345,"name":"spark/status","data":"online"}
+{"published_at":"2026-06-05T14:10:15.000Z","productID":12345,"name":"Ubidots-Sensor-Hook-v1","data":"{\"occupancy\":1,\"dailyoccupancy\":22,\"battery\":90.2,\"alerts\":0,\"connecttime\":12}"}

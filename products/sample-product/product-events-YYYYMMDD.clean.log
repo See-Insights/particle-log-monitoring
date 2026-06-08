@@ -1,0 +1,3 @@
+2026-06-07 08:00:05 | Sample-Device | REPORT occ=0 daily=25 batt=89.4 alerts=0 conn=10
+2026-06-07 09:00:06 | Sample-Device | REPORT occ=0 daily=25 batt=89.1 alerts=0 conn=9
+2026-06-07 10:00:04 | Sample-Device | REPORT occ=1 daily=25 batt=88.9 alerts=0 conn=11

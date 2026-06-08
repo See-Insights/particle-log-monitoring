@@ -1,16 +1,13 @@
-# Runtime logs
-*.log
-products/*/archive/
-products/*/*.raw.log
-products/*/*.clean.log
-
-# Symlinks to runtime logs
-products/*/latest.raw.log
-products/*/latest.clean.log
-
-# Local inventory mapping (real device IDs stay local)
+# Local inventory
 inventory/devices.csv
 !inventory/devices.example.csv
+
+# Local monitoring products
+products/*
+
+# Keep repository template
+!products/sample-product/
+!products/sample-product/**
 
 # macOS / editor noise
 .DS_Store

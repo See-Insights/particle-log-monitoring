@@ -1,4 +1,4 @@
 product_id,device_id,device_name
-00000,example_device_id_1,Product-Name-Example-Device-1
-00000,example_device_id_2,Product-Name-Example-Device-2
-00000,example_device_id_3,Product-Name-Example-Device-3
+12345,example_device_1,Sample-Device
+12345,example_device_2,Sample-Gateway
+67890,example_device_3,Sample-Boron
