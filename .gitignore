@@ -1,0 +1,13 @@
+# Runtime logs
+*.log
+products/*/archive/
+products/*/*.raw.log
+products/*/*.clean.log
+
+# Symlinks to runtime logs
+products/*/latest.raw.log
+products/*/latest.clean.log
+
+# macOS / editor noise
+.DS_Store
+.vscode/
