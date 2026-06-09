@@ -53,12 +53,30 @@ def local_ts(iso_ts):
 def parse_data(data):
     if data is None or data == "":
         return ""
+
     try:
         parsed = json.loads(data)
+
+        # Normal case:
+        # '{"version":"14.0.0","alert":0}'
         if isinstance(parsed, dict):
             return parsed
+
+        # Double-encoded case:
+        # "\"{\\\"version\\\":\\\"14.0.0\\\"}\""
+        if isinstance(parsed, str):
+            try:
+                nested = json.loads(parsed)
+                if isinstance(nested, dict):
+                    return nested
+            except Exception:
+                pass
+
+            return parsed
+
     except Exception:
         pass
+
     return data
 
 def num_value(value, default=0):
@@ -243,6 +261,13 @@ for line in sys.stdin:
         nested_id = parsed_data.get("deviceid", "")
         if nested_id:
             nested_device = device_map.get(nested_id, nested_id)
+
+    if name == "status":
+        if VERBOSE:
+            print(
+                f"DEBUG STATUS: type={type(parsed_data).__name__} "
+                f"value={repr(parsed_data)[:200]}"
+            )
 
     if name == "status" and isinstance(parsed_data, dict):
         reset_reason = parsed_data.get("resetReason", "?")
