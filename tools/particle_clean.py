@@ -270,25 +270,45 @@ for line in sys.stdin:
             )
 
     if name == "status" and isinstance(parsed_data, dict):
-        reset_reason = parsed_data.get("resetReason", "?")
-        alert = parsed_data.get("alert", "?")
+        reset_reason = int(num_value(parsed_data.get("resetReason", 0)))
+        alert = int(num_value(parsed_data.get("alert", 0)))
+        last_alert = int(num_value(parsed_data.get("lastAlert", 0)))
+        watchdog_count = int(num_value(parsed_data.get("watchdogResetCount", 0)))
+        last_watchdog_bc = int(num_value(parsed_data.get("lastWatchdogBreadcrumb", 0)))
+        pmic_count = int(num_value(parsed_data.get("pmicAnomalyCount", 0)))
+        failsafe_count = int(num_value(parsed_data.get("failsafeCount", 0)))
+
+        is_interesting_status = (
+            reset_reason not in (0, 30)      # not normal / power_management
+            or alert > 0
+            or last_alert > 0
+            or watchdog_count > 0
+            or last_watchdog_bc > 0
+            or pmic_count > 0
+            or failsafe_count > 0
+        )
+
+        if not VERBOSE and not is_interesting_status:
+            continue
+
+        version = parsed_data.get("version", "?")
         heap = parsed_data.get("freeHeap", "?")
         conn_age = parsed_data.get("lastConnectionAgeSec", "?")
-        version = parsed_data.get("version", "?")
         breadcrumb = parsed_data.get("appBreadcrumb", "?")
+        breadcrumb_ms = parsed_data.get("appBreadcrumbMs", "?")
 
         line = (
             f"{ts} | {device_name} | STATUS "
-            f"ver={version} reset={reset_reason} alert={alert} "
-            f"heap={heap} connAge={conn_age} breadcrumb={breadcrumb}"
+            f"ver={version} reset={reset_reason} alert={alert} lastAlert={last_alert} "
+            f"heap={heap} connAge={conn_age} "
+            f"breadcrumb={breadcrumb} breadcrumbMs={breadcrumb_ms} "
+            f"wdogCount={watchdog_count} lastWdogBc={last_watchdog_bc} "
+            f"pmicCount={pmic_count} failsafeCount={failsafe_count}"
         )
 
-        alert_num = int(num_value(alert, 0))
-        reset_num = int(num_value(reset_reason, 0))
-
-        if alert_num > 0:
+        if reset_reason == 60 or watchdog_count > 0:
             line = color(line, RED)
-        elif reset_num not in (0, 30):
+        elif is_interesting_status:
             line = color(line, YELLOW)
 
         print(line)
