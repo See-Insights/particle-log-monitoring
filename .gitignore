@@ -12,3 +12,6 @@ products/*
 # macOS / editor noise
 .DS_Store
 .vscode/
+
+# Local helper scripts with environment-specific identifiers
+tools/archive_logs.sh
